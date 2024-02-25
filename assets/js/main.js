@@ -22,6 +22,21 @@ function convertPokemonToLi(pokemon) {
         </li>
     `
 }
+const searchInput = document.getElementById('searchInput');
+
+searchInput.addEventListener('input', () => {
+    const searchTerm = searchInput.value.toLowerCase();
+    const allPokemonElements = document.querySelectorAll('.pokemon');
+
+    allPokemonElements.forEach((pokemonElement) => {
+        const pokemonName = pokemonElement.querySelector('.name').innerText.toLowerCase();
+        if (pokemonName.includes(searchTerm)) {
+            pokemonElement.style.display = 'block';
+        } else {
+            pokemonElement.style.display = 'none';
+        }
+    });
+});
 
 function loadPokemonItens(offset, limit) {
     pokeApi.getPokemons(offset, limit).then((pokemons = []) => {
